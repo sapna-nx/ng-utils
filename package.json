@@ -1,0 +1,32 @@
+{
+  "name": "itng",
+  "version": "0.0.1",
+  "description": "",
+  "main": "static/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ITNG/ng-utils.git"
+  },
+  "author": "Ryan P Kilby <rpkilby@ncsu.edu>",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/ITNG/ng-utils/issues"
+  },
+  "homepage": "https://github.com/ITNG/ng-utils#readme",
+  "private": true,
+  "jspm": {
+    "format": "esm"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.0-beta.6",
+    "eslint": "^2.4.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-react": "^4.2.3"
+  }
+}
