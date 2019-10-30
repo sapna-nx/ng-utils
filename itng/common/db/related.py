@@ -60,5 +60,5 @@ class ManyThroughManyField(related.ManyToManyField):
     def contribute_to_related_class(self, cls, related):
         super(ManyThroughManyField, self).contribute_to_related_class(cls, related)
 
-        if not self.rel.is_hidden() and not related.related_model._meta.swapped:
-            setattr(cls, related.get_accessor_name(), ManyToManyDescriptor(self.remote_field, reverse=True))
+        # if not self.rel.is_hidden() and not related.related_model._meta.swapped:
+            # setattr(cls, related.get_accessor_name(), ManyToManyDescriptor(self.remote_field, reverse=True))

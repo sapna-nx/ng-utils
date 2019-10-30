@@ -1,6 +1,6 @@
 
 from django.conf.urls import url
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 

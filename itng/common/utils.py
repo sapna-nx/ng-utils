@@ -1,7 +1,7 @@
 
 from django.conf import settings
 from django.contrib.sites.requests import RequestSite
-from django.core import urlresolvers
+from django import urls
 from django.utils.encoding import smart_text
 from django.utils import timezone
 
@@ -93,20 +93,20 @@ def relative_viewname(viewname, resolver):
     """
     """
     return ':'.join(
-        filter(None, [
+        [_f for _f in [
             resolver.app_name, resolver.namespace, viewname
-        ])
+        ] if _f]
     )
 
 
 def reverse(viewname, request, urlconf=None, args=None, kwargs=None, current_app=None):
     """
-    A wrapper around Django's builtin `django.core.urlresolvers.reverse` utility function
+    A wrapper around Django's builtin `django.urls.reverse` utility function
     that will use the current request to derive the `app_name` and `namespace`. This is
     most useful for apps that need to reverse their own URLs.
     """
     viewname = relative_viewname(viewname, request.resolver_match)
-    return urlresolvers.reverse(viewname, urlconf, args, kwargs, current_app)
+    return urls.reverse(viewname, urlconf, args, kwargs, current_app)
 
 
 def get_site(request):
