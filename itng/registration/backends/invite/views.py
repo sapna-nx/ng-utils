@@ -4,9 +4,9 @@ from django.views.generic import TemplateView, FormView
 
 from itng.common.utils import reverse
 
-from registration import signals
+from django_registration import signals
 
-from registration.backends.hmac.views import RegistrationView, ActivationView as BaseActivationView
+from django_registration.backends.activation.views import RegistrationView, ActivationView as BaseActivationView
 
 from .forms import InviteForm, ActivationForm
 
