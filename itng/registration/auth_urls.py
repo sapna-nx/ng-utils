@@ -30,12 +30,12 @@ _password_reset_confirm = r'^password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<toke
 
 
 urlpatterns = [
-    url(r'^login/$',                    views.login,                    {'template_name': 'registration/auth/login.html'},                      name='login'),                      # flake8: noqa
-    url(r'^logout/$',                   views.logout,                   {'template_name': 'registration/auth/logged_out.html'},                 name='logout'),                     # flake8: noqa
-    url(r'^password/change/$',          views.password_change,          {'template_name': 'registration/auth/password_change_form.html'},       name='password_change'),            # flake8: noqa
-    url(r'^password/change/done/$',     views.password_change_done,     {'template_name': 'registration/auth/password_change_done.html'},       name='password_change_done'),       # flake8: noqa
-    url(r'^password/reset/$',           views.password_reset,           {'template_name': 'registration/auth/password_reset_form.html'},        name='password_reset'),             # flake8: noqa
-    url(_password_reset_confirm,        views.password_reset_confirm,   {'template_name': 'registration/auth/password_reset_confirm.html'},     name='password_reset_confirm'),     # flake8: noqa
-    url(r'^password/reset/complete/$',  views.password_reset_complete,  {'template_name': 'registration/auth/password_reset_complete.html'},    name='password_reset_complete'),    # flake8: noqa
-    url(r'^password/reset/done/$',      views.password_reset_done,      {'template_name': 'registration/auth/password_reset_done.html'},        name='password_reset_done'),        # flake8: noqa
+    url(r'^login/$',                    views.LoginView,                    {'template_name': 'registration/auth/login.html'},                      name='login'),                      # flake8: noqa
+    url(r'^logout/$',                   views.LogoutView,                   {'template_name': 'registration/auth/logged_out.html'},                 name='logout'),                     # flake8: noqa
+    url(r'^password/change/$',          views.PasswordChangeView,          {'template_name': 'registration/auth/password_change_form.html'},       name='password_change'),            # flake8: noqa
+    url(r'^password/change/done/$',     views.PasswordChangeView,     {'template_name': 'registration/auth/password_change_done.html'},       name='password_change_done'),       # flake8: noqa
+    url(r'^password/reset/$',           views.PasswordResetView,           {'template_name': 'registration/auth/password_reset_form.html'},        name='password_reset'),             # flake8: noqa
+    url(_password_reset_confirm,        views.PasswordResetConfirmView,   {'template_name': 'registration/auth/password_reset_confirm.html'},     name='password_reset_confirm'),     # flake8: noqa
+    url(r'^password/reset/complete/$',  views.PasswordResetCompleteView,  {'template_name': 'registration/auth/password_reset_complete.html'},    name='password_reset_complete'),    # flake8: noqa
+    url(r'^password/reset/done/$',      views.PasswordResetDoneView,      {'template_name': 'registration/auth/password_reset_done.html'},        name='password_reset_done'),        # flake8: noqa
 ]
