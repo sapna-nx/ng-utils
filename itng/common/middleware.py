@@ -26,7 +26,7 @@ class LoginRequiredMiddleware(MiddlewareMixin):
         self.regexes = list(map(re.compile, regexes))
 
     def process_view(self, request, callback, callback_args, callback_kwargs):
-        if request.user.is_authenticated() \
+        if request.user.is_authenticated \
            or getattr(callback, 'login_exempt', False) \
            or self.is_exempt(request.path_info):
             return None
