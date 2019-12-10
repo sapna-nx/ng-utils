@@ -11,18 +11,18 @@ your own URL patterns for these views instead.
 
 """
 
-from django.conf.urls import url
+from django.urls import re_path, path
 
 from itng.registration.backends.invite import views
 
 
 urlpatterns = [
-    url(r'^activate/complete/$', views.ActivationCompleteView.as_view(), name='activation_complete'),
+    path('activate/complete/', views.ActivationCompleteView.as_view(), name='activation_complete'),
     # Activation keys get matched by \w+ instead of the more specific
     # [a-fA-F0-9]{40} because a bad activation key should still get to the view;
     # that way it can return a sensible "invalid key" message instead of a
     # confusing 404.
     # The activation key can make use of any character from the
     # URL-safe base64 alphabet, plus the colon as a separator.
-    url(r'^activate/(?P<activation_key>[-:\w]+)/$', views.ActivationView.as_view(), name='activate'),
+    path('activate/(?P<activation_key>[-:\w]+)/', views.ActivationView.as_view(), name='activate'),
 ]

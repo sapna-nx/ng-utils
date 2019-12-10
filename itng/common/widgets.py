@@ -39,7 +39,7 @@ class TransferSelect(widgets.MultiWidget):
         })
         super(TransferSelect, self).__init__(*args, **kwargs)
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         # MultiWidget assumes values that are lists are already decompressed.
         # This assumption is incorrect for `MultipleChoiceField`s and bypasses
         # the decompress function.

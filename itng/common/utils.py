@@ -4,6 +4,7 @@ from django.contrib.sites.requests import RequestSite
 from django import urls
 from django.utils.encoding import smart_text
 from django.utils import timezone
+from django.shortcuts import redirect
 
 
 def import_class(path):
@@ -106,7 +107,7 @@ def reverse(viewname, request, urlconf=None, args=None, kwargs=None, current_app
     most useful for apps that need to reverse their own URLs.
     """
     viewname = relative_viewname(viewname, request.resolver_match)
-    return urls.reverse(viewname, urlconf, args, kwargs, current_app)
+    return redirect(urls.reverse(viewname, urlconf, args, kwargs, current_app))
 
 
 def get_site(request):

@@ -11,12 +11,12 @@ your own URL patterns for these views instead.
 
 """
 
-from django.conf.urls import url
+from django.urls import re_path, path
 
 from itng.registration.backends.invite import views
 
 
 urlpatterns = [
-    url(r'^invite/$',           views.InvitationView.as_view(),         name='invite'),                # flake8: noqa
-    url(r'^invite/complete/$',  views.InvitationCompleteView.as_view(), name='invitation_complete'),   # flake8: noqa
+    re_path('^invite/',           views.InvitationView.as_view(),         name='invite'),                # flake8: noqa
+    re_path('^invite/complete/',  views.InvitationCompleteView.as_view(), name='invitation_complete'),   # flake8: noqa
 ]
