@@ -19,16 +19,25 @@
 {% endcomment %}
 
 <div class='row-fluid transferselect'>
+    {% comment %} {% for subwidget in widget.subwidgets %}
+    <div class="col-md-6" >
+            <div class="header">
+                <label for="{{ available_id }}">Available</label> [<button type="button" class="btn btn-xs btn-link" {{ select_attrs }}>Select</button>]
+            </div>
+        {% include subwidget.template_name with widget=subwidget %}
+
+            </div>
+    {% endfor %} {% endcomment %}
     <div class="col-md-6" >
         <div class="header">
             <label for="{{ available_id }}">Available</label> [<button type="button" class="btn btn-xs btn-link" {{ select_attrs }}>Select</button>]
         </div>
-        {{ available }}
+        {% include widget.subwidgets.0.template_name with widget=widget.subwidgets.0 %}
     </div>
     <div class="col-md-6">
         <div class="header">
             <label for="{{ selected_id }}">Selected</label> [<button type="button" class="btn btn-xs btn-link" {{ deselect_attrs }}>Deselect</button>]
         </div>
-        {{ selected }}
+        {% include widget.subwidgets.1.template_name with widget=widget.subwidgets.1 %}
     </div>
 </div>

@@ -25,17 +25,16 @@ consult a specific backend's documentation for details.
 
 from django.urls import re_path, path
 from django.contrib.auth import views
+from django.views.generic import TemplateView
 
 _password_reset_confirm = r'^password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/'
 
 
 urlpatterns = [
-    re_path('^login/',                    views.LoginView,                    {'template_name': 'registration/auth/login.html'},                      name='login'),                      # flake8: noqa
-    re_path('^logout/',                   views.LogoutView,                   {'template_name': 'registration/auth/logged_out.html'},                 name='logout'),                     # flake8: noqa
-    re_path('^password/change/',          views.PasswordChangeView,          {'template_name': 'registration/auth/password_change_form.html'},       name='password_change'),            # flake8: noqa
-    re_path('^password/change/done/',     views.PasswordChangeView,     {'template_name': 'registration/auth/password_change_done.html'},       name='password_change_done'),       # flake8: noqa
-    re_path('^password/reset/',           views.PasswordResetView,           {'template_name': 'registration/auth/password_reset_form.html'},        name='password_reset'),             # flake8: noqa
-    re_path(_password_reset_confirm,        views.PasswordResetConfirmView,   {'template_name': 'registration/auth/password_reset_confirm.html'},     name='password_reset_confirm'),     # flake8: noqa
-    re_path('^password/reset/complete/',  views.PasswordResetCompleteView,  {'template_name': 'registration/auth/password_reset_complete.html'},    name='password_reset_complete'),    # flake8: noqa
-    re_path('^password/reset/done/',      views.PasswordResetDoneView,      {'template_name': 'registration/auth/password_reset_done.html'},        name='password_reset_done'),        # flake8: noqa
+    re_path('^password/change/$',          views.PasswordChangeView.as_view(template_name='registration/auth/password_change_form.html'), name='password_change'),            # flake8: noqa
+    re_path('^password/change/done/$',     views.PasswordChangeView.as_view(template_name='registration/auth/password_change_done.html'), name='password_change_done'),       # flake8: noqa
+    re_path('^password/reset/$',           views.PasswordResetView.as_view(template_name='registration/auth/password_reset_form.html'), name='password_reset'),             # flake8: noqa
+    re_path(_password_reset_confirm,      views.PasswordResetConfirmView.as_view(template_name='registration/auth/password_reset_confirm.html'), name='password_reset_confirm'),     # flake8: noqa
+    re_path('^password/reset/complete/$',  views.PasswordResetCompleteView.as_view(template_name='registration/auth/password_reset_complete.html'), name='password_reset_complete'),    # flake8: noqa
+    re_path('^password/reset/done/$',      views.PasswordResetDoneView.as_view(template_name='registration/auth/password_reset_done.html'), name='password_reset_done'),        # flake8: noqa
 ]

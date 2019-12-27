@@ -9,35 +9,46 @@ from itng.common.utils import ModelChoiceIterator
 
 
 class TransferSelect(widgets.MultiWidget):
+    template_name = 'forms/widgets/transferselect.html'
     """ Take two on the select multiple widget.
         This should work with a normal ModelMultipleChoiceField.
     """
     def __init__(self, *args, **kwargs):
         self.choices = kwargs.pop('choices', ())
-        self.template_name = kwargs.pop('template_name', 'forms/widgets/transferselect.html')
         self.iterator = kwargs.pop('iterator', ModelChoiceIterator)
 
         self.ts_id = "%x" % random.randint(0, 16**6)
+        widgetsToRender = [
+            widgets.SelectMultiple(
+                choices=self.choices,
+                attrs={
+                    'data-transfer-bucket': 'available',
+                    'data-transfer-id': self.ts_id,
+                },
+            ),
+            widgets.SelectMultiple(
+                choices=(),
+                attrs={
+                    'data-transfer-bucket': 'selected',
+                    'data-transfer-id': self.ts_id,
+                },
+            ),
+        ]
+        super().__init__(widgetsToRender, kwargs.get('attrs'))
 
-        kwargs.update({
-            'widgets': (
-                widgets.SelectMultiple(
-                    choices=self.choices,
-                    attrs={
-                        'data-transfer-bucket': 'available',
-                        'data-transfer-id': self.ts_id,
-                    },
-                ),
-                widgets.SelectMultiple(
-                    choices=(),
-                    attrs={
-                        'data-transfer-bucket': 'selected',
-                        'data-transfer-id': self.ts_id,
-                    },
-                ),
-            )
-        })
-        super(TransferSelect, self).__init__(*args, **kwargs)
+    def get_context(self, name, value, attrs=None):
+        context = super().get_context(name, value, attrs)
+        context['available_id'] = "id_%s_0" % name
+        context['selected_id'] = "id_%s_1" % name
+        context['select_attrs'] = mark_safe(flatatt({
+            'data-transfer-action': 'select',
+            'data-transfer-id': self.ts_id,
+        }))
+        context['deselect_attrs'] = mark_safe(flatatt({
+            'data-transfer-action': 'deselect',
+            'data-transfer-id': self.ts_id,
+        }))
+        return context
 
     def render(self, name, value, attrs=None, renderer=None):
         # MultiWidget assumes values that are lists are already decompressed.
