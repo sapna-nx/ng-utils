@@ -70,7 +70,7 @@ class MultipleFormMixin(ContextMixin):
 
     def get_forms(self, names=None, form_classes=None):
         if names is None:
-            names = self.form_classes.keys()
+            names = list(self.form_classes.keys())
 
         if form_classes is None:
             form_classes = {}
@@ -123,7 +123,7 @@ class ProcessMultipleFormsView(ProcessFormView):
         POST variables and then checked for validity.
         """
         forms = self.get_forms()
-        if all(form.is_valid() for form in forms.values()):
+        if all(form.is_valid() for form in list(forms.values())):
             return self.forms_valid(forms)
         else:
             return self.forms_invalid(forms)

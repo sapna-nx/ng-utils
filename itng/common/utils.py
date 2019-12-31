@@ -93,9 +93,9 @@ def relative_viewname(viewname, resolver):
     """
     """
     return ':'.join(
-        filter(None, [
+        [_f for _f in [
             resolver.app_name, resolver.namespace, viewname
-        ])
+        ] if _f]
     )
 
 

@@ -39,7 +39,7 @@ class ChoicesTestCase(unittest.TestCase):
         ))
 
         self.assertTrue(hasattr(opts, '__EMPTY__'))
-        self.assertEqual(opts.keys(), ['', 'a', 'b'])
+        self.assertEqual(list(opts.keys()), ['', 'a', 'b'])
         self.assertEqual(opts.__EMPTY__, '')
 
     def test_snake_case(self):
@@ -57,7 +57,7 @@ class ChoicesTestCase(unittest.TestCase):
             ('b', 'B'),
         ))
 
-        self.assertEqual(opts.keys(), ['a', 'b'])
+        self.assertEqual(list(opts.keys()), ['a', 'b'])
 
     def test_values(self):
         opts = choices((
@@ -65,7 +65,7 @@ class ChoicesTestCase(unittest.TestCase):
             ('b', 'B'),
         ))
 
-        self.assertEqual(opts.values(), ['A', 'B'])
+        self.assertEqual(list(opts.values()), ['A', 'B'])
 
     def test_boolean_type(self):
         opts = choices((
@@ -77,7 +77,7 @@ class ChoicesTestCase(unittest.TestCase):
         self.assertTrue(hasattr(opts, 'FALSE'))
         self.assertEqual(opts.TRUE, True)
         self.assertEqual(opts.FALSE, False)
-        self.assertEqual(opts.keys(), [True, False])
+        self.assertEqual(list(opts.keys()), [True, False])
 
     def test_integer_type(self):
         opts = choices((
@@ -89,7 +89,7 @@ class ChoicesTestCase(unittest.TestCase):
         self.assertTrue(hasattr(opts, '_2'))
         self.assertEqual(opts._1, 1)
         self.assertEqual(opts._2, 2)
-        self.assertEqual(opts.keys(), [1, 2])
+        self.assertEqual(list(opts.keys()), [1, 2])
 
 
 class OverrideAttrTestCase(unittest.TestCase):
